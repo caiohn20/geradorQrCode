@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">QRCode</h1>
+</div>
+
+<div class="row justify-content-md-center">
+    <div class="col">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <label for="conteudoQrCode">Conteúdo</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="conteudoQrCode" aria-describedby="qrcodeHelp" name="parametro" required>
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Gerar QRCode</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row justify-content-md-center mt-5">
+    <div class="col align-self-center text-center">
+        <label>QRCode Base64</label>
+        <img style="width: 250px; height: 250px; border: 1px solid black;" src="@TempData["imagemQrCodeBase64"]" alt="QRCode Base64" title="QRCode" />
+    </div>
+    <div class="col align-self-center text-center">
+        <label>QRCode Bitmap</label>
+        <img style="width: 250px; height: 250px; border: 1px solid black;" src="@TempData["imagemQrCodeBitmap"]" alt="QRCode Bitmap" title="QRCode" />
+    </div>
+    <div class="col align-self-center text-center">
+        <label>QRCode Bytes</label>
+        <img style="width: 250px; height: 250px; border: 1px solid black;" src="@TempData["imagemQrCodeBytes"]" alt="QRCode Bytes" title="QRCode" />
+    </div>
+</div>
