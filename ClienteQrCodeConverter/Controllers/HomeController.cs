@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -66,13 +67,17 @@ namespace ClienteQrCodeConverter.Controllers
                 conteudo = JsonSerializer.Deserialize<QrCodeParametros>(resultado);
 
                 Bitmap bmp;
+                string bitmapBase64;
                 using (var ms = new MemoryStream(conteudo.bytesConverted))
                 {
                     bmp = new Bitmap(ms);
+                    bmp.Save(ms, ImageFormat.Jpeg);
+                    byte[] byteImage = ms.ToArray();
+                    bitmapBase64 = Convert.ToBase64String(byteImage);
                 }
 
                 TempData["imagemQrCodeBase64"] = "data:image/bmp;base64," + conteudo.textConverted;
-                TempData["imagemQrCodeBitmap"] = "data:image/image/bmp," + bmp;
+                TempData["imagemQrCodeBitmap"] = "data:image/bmp;base64," + bitmapBase64;
                 TempData["imagemQrCodeBytes"] = "data:image/bmp;base64," + Convert.ToBase64String(conteudo.bytesConverted);
             }
 
